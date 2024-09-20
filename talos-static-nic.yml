@@ -12,7 +12,6 @@ machine:
           - network: 0.0.0.0/0
             gateway: 192.168.20.2
         vip:
-
           ip: 192.168.20.20
   install:
       image: factory.talos.dev/installer/ae273986d1e1d92665814be7a76339c025c0ea3aecfdbaf857cfc98e38504450:v1.7.6        
