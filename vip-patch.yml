@@ -1,15 +1,9 @@
 machine:
-
     network:
-
      interfaces:
-
       - interface: eth0
-
         dhcp: false
-
         vip:
-
           ip: 10.10.20.10
 cluster:
   network:
