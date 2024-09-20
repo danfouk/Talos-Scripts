@@ -1,0 +1,19 @@
+apt install socat conntrack ebtables ipset
+
+chmod +x kk
+./kk create config --with-kubernetes version 1.26.5 --with-kubesphere 
+
+Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
+13:15:54 UTC stdout: [kubeworker-02]
+W0108 13:15:28.477131   27160 common.go:84] your configuration file uses a deprecated API spec: "kubeadm.k8s.io/v1beta2". Please use 'kubeadm config migrate --old-config old.yaml --new-config new.yaml', which will write the new, similar spec using a newer API version.
+[preflight] Running pre-flight checks
+[preflight] Reading configuration from the cluster...
+[preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+W0108 13:15:41.004399   27160 utils.go:69] The recommended value for "clusterDNS" in "KubeletConfiguration" is: [10.233.0.10]; the provided value is: [169.254.25.10]
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+
+
+154.160.24.8
+scp file /home/danray/kubekey/kubeworker-04/initOS.sh to remote /usr/local/bin/kube-scripts/initOS.sh failed: Failed to exec command: sudo -E /bin/bash -c "mv -f /tmp/kubekey/usr/local/bin/kube-scripts/initOS.sh /usr/local/bin/kube-scripts/initOS.sh"
+mv: cannot stat '/tmp/kubekey/usr/local/bin/kube-scripts/initOS.sh': No such file or directory: Process exited with status 1

@@ -1,0 +1,149 @@
+
+---
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: elk-kube-home
+  namespace: elk-home-cluster
+spec:
+  version: 8.12.0
+  nodeSets:
+    - name: master
+      count: 3
+      podTemplate:
+        spec:
+          containers:
+          - name: elasticsearch
+            env:
+            - name: ES_JAVA_OPTS
+              value: -Xms2g -Xmx2g
+            resources:
+              requests:
+                memory: 4Gi
+                cpu: 2
+              limits:
+                memory: 4Gi      
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            storageClassName: openebs-zfspv
+            resources:
+              requests:
+                storage: 10Gi          
+      config:
+        node.roles: [ master , remote_cluster_client]
+        # node.store.allow_mmap: false
+    - name: ingest
+      count: 3
+      podTemplate:
+        spec:
+          containers:
+          - name: elasticsearch
+            env:
+            - name: ES_JAVA_OPTS
+              value: -Xms2g -Xmx2g
+            resources:
+              requests:
+                memory: 4Gi
+                cpu: 2
+              limits:
+                memory: 4Gi
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            storageClassName: openebs-zfspv
+            resources:
+              requests:
+                storage: 10Gi           
+      config:
+        node.roles: [ingest, remote_cluster_client] 
+    - name: data
+      count: 4
+      podTemplate:
+        spec:
+          containers:
+          - name: elasticsearch
+            env:
+            - name: ES_JAVA_OPTS
+              value: -Xms4g -Xmx4g
+            resources:
+              requests:
+                memory: 8Gi
+                cpu: 2
+              limits:
+                memory: 16G
+                cpu: 4
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            storageClassName: openebs-zfspv
+            resources:
+              requests:
+                storage: 100Gi            
+      config:
+        node.roles: [data, remote_cluster_client]
+   
+---
+# This Section is for Kinana Config.
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata: 
+  name: elk-kibana
+  namespace: elk-home-cluster
+spec:
+  version: 8.11.4
+  count: 2
+  elasticsearchRef:
+    name: elk-kube-home
+  secureSettings:
+    - secretName: kibana-enc-key  
+  http:
+    service:
+      spec:
+        type: NodePort
+        ports:
+          - port: 5601
+            targetPort: 5601
+            protocol: TCP
+            nodePort: 31560
+    tls:
+      selfSignedCertificate:
+        subjectAltNames:
+        - dns: elk-kiba-home.local    
+
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: kibana-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+spec:
+ rules:
+ - host: kibana.domain.example
+   http:
+     paths:
+     - path: /
+       backend:
+         serviceName: d3m0-kb-http
+         servicePort: 5601 
+
+# kubectl create secret generic kibana-enc-key --from-literal=xpack.security.encryptionKey=94d2263b1ead716ae228277049f19975aff8644b4fcfe429c95143c1e902938md
+
+# kubectl get secret -n elk-home-cluster  elk-kube-home-es-elastic-user -o=jsonpath='{.data.elastic}' | base64 --decode; echo
+
+# 7hQjeghk51kR1yt0k10H300t
+
+# kubectl get service elk-kibana-kb-http
+
+# kubectl port-forward service/elk-kibana-kb-http 5601
