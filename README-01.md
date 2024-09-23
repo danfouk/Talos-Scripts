@@ -135,3 +135,10 @@ Once chosen, form the full HTTPS URL from this IP:
 
         talosctl machineconfig patch worker.yaml --patch @worker-patch.yaml --output worker-01.yaml  
    - https://github.com/danfouk/Talos-Scripts/blob/main/worker-patch.yaml
+
+**Apply Configuration while validating the node identity**
+---
+   
+      talosctl apply-config --insecure \
+          --nodes 192.168.0.2 \          
+          --file controlplane-01.yaml
