@@ -142,6 +142,7 @@ Once chosen, form the full HTTPS URL from this IP:
 **Apply the Customized Controlplane Configuration** 
 ---
 - We then apply the configuration file to install Talos Linus with Kubelet artifacts to specified system disk.
+
       talosctl apply-config --insecure \
           --nodes 192.168.0.2 \          
           --file controlplane-01.yaml
