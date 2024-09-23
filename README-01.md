@@ -125,3 +125,13 @@ Once chosen, form the full HTTPS URL from this IP:
       created controlplane.yaml
       created worker.yaml
       created talosconfig
+- For my set-up I configured a patch file which I used to customize the default generated files, both `control plane` and `worker node` using the command below.
+- `control plane`
+
+      talosctl machineconfig patch controlplane.yaml --patch @controlplane-patch --output controlplane-01.yaml
+  - https://github.com/danfouk/Talos-Scripts/blob/main/controlplane-patch.yaml
+
+- `worker node`
+
+        talosctl machineconfig patch worker.yaml --patch @worker-patch.yaml --output worker-01.yaml  
+   - https://github.com/danfouk/Talos-Scripts/blob/main/controlplane-patch.yaml
