@@ -150,4 +150,4 @@ Once chosen, form the full HTTPS URL from this IP:
           --file controlplane-01.yaml
 
 > [!IMPORTANT]
-> Remember to apply the
+> After the configuration is applied to a node, it will reboot after some time(2-10mins). Repeat this process for each of the nodes in your cluster. 
