@@ -51,8 +51,52 @@ At this point, you should:
 Once chosen, form the full HTTPS URL from this IP:
 
       https://192.168.0.15:6443
+> [!IMPORTANT]
+> If you create a DNS record for this IP, note you will need to use the IP address itself, not the DNS name, to configure the shared IP (machine.network.interfaces[].vip.ip) in the Talos configuration.
 
+> After the machine configurations are generated, you will want to edit the controlplane.yaml file to activate the VIP:
 
+      machine:
+         network:
+           interfaces:
+            - interface: enp2s0
+              dhcp: true
+              vip:
+                ip: 192.168.0.15
+`Read More:`  https://www.talos.dev/v1.7/talos-guides/network/vip/
+
+***Multihoming and etcd***
+---
++ I tried to use the ***multihoming*** approach of using two vNIC in my setup to enable seperate kubenerts internal communication from public comms.
++ The `etcd cluster` needs to establish a mesh of connections among the members,This approach requires additional configuration.
++ It is done using the so-called advertised address - each node learns the others’ addresses as they are advertised.
+> [!WARNING]
+> It is crucial that these IP addresses are stable, i.e., that each node always advertises the same IP address.
+
+***Multihoming and kubelets***
+---
+- Stable IP addressing for kubelets (i.e., nodeIP) is not strictly necessary but highly recommended as it ensures that, e.g., kube-proxy and CNI routing take the desired routes. 
+- Analogously to etcd, for kubelets this is controlled via `machine.kubelet.nodeIP.validSubnets`
+
+> [!TIP]
+> Let’s assume that we have a cluster with two networks:
+   - public network xxx.xxx.xxx.0/x
+   - private network 192.168.0.0/16
+     
+> We want to use the private network for etcd and kubelet communication:
+
+      machine:
+        kubelet:
+          nodeIP:
+            validSubnets:
+              - 192.168.0.0/16
+      #...
+      cluster:
+        etcd:
+          advertisedSubnets: # listenSubnets defaults to advertisedSubnets if not set explicitly
+            - 192.168.0.0/16
+
+      
 > [!NOTE]
 > Useful information that users should know, even when skimming content.
 
