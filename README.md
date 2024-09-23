@@ -32,7 +32,8 @@ At this point, you should:
 **Define the Kubernetes Endpoint**
 ---
 - In order to configure Kubernetes, Talos needs to know what the endpoint of the Kubernetes API Server will be.
-- in order to be highly available, should be configured in a way that uses all available control plane nodes.
+- In order for the endpoint to be highly available, it should be configured in a way that uses all available control plane nodes.
+- There are 3 major ways but for my LAB I am using `Talos Linux’s built in VIP functionality`.(using a load-balancer,or using multiple DNS records)
 
 
 
