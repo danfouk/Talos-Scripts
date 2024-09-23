@@ -39,7 +39,7 @@ At this point, you should:
    - Talos Linux’s built in VIP functionality.
 - For my LAB I am using `Talos Linux’s built in VIP functionality`.
 
-**Layer 2 VIP Shared IP** 
+**Layer 2 VIP Shared IP**
 ---
 - Talos has integrated support for serving Kubernetes from a shared/virtual IP address. This requires Layer 2 connectivity between control plane nodes.
 - Choose an unused IP address on the same subnet as the control plane nodes for the VIP. For instance, if your control plane node IPs are:
@@ -75,14 +75,14 @@ Once chosen, form the full HTTPS URL from this IP:
 
 ***Multihoming and kubelets***
 ---
-- Stable IP addressing for kubelets (i.e., nodeIP) is not strictly necessary but highly recommended as it ensures that, e.g., kube-proxy and CNI routing take the desired routes. 
+- Stable IP addressing for kubelets (i.e., nodeIP) is not strictly necessary but highly recommended as it ensures that, e.g., kube-proxy and CNI routing take the desired routes.
 - Analogously to etcd, for kubelets this is controlled via `machine.kubelet.nodeIP.validSubnets`
 
 > [!TIP]
 > Let’s assume that we have a cluster with two networks:
    - public network xxx.xxx.xxx.0/x
    - private network 192.168.0.0/16
-     
+
 > We want to use the private network for etcd and kubelet communication:
 
       machine:
@@ -108,7 +108,7 @@ Once chosen, form the full HTTPS URL from this IP:
 ---
 + When generating the configuration files for a Talos Linux cluster, it is recommended to start with generating a secrets bundle which should be saved in a secure location.
 + This bundle can be used to generate machine or client configurations at any time:
-  
+
       talosctl gen secrets -o secrets.yaml
 > The secrets.yaml can also be extracted from the existing controlplane machine configuration with `talosctl gen secrets --from-controlplane-config controlplane.yaml -o secrets.yaml` command.
 
@@ -117,7 +117,7 @@ Once chosen, form the full HTTPS URL from this IP:
         talosctl gen config --with-secrets secrets.yaml <cluster-name> <cluster-endpoint>
 - Note, `cluster-name` is an arbitrary name for the cluster, used in your local client configuration as a label. It should be unique in the configuration on your local workstation.
 - The `cluster-endpoint` is the Kubernetes Endpoint you selected from above. This is the Kubernetes API URL, and it should be a complete URL, with https:// and port. (The default port is 6443)
-  
+
 >  Example:
 
       talosctl gen config --with-secrets secrets.yaml my-cluster https://192.168.64.15:6443
@@ -133,19 +133,21 @@ Once chosen, form the full HTTPS URL from this IP:
 
 - `worker node`
 
-        talosctl machineconfig patch worker.yaml --patch @worker-patch.yaml --output worker-01.yaml  
+        talosctl machineconfig patch worker.yaml --patch @worker-patch.yaml --output worker-01.yaml
    - https://github.com/danfouk/Talos-Scripts/blob/main/worker-patch.yaml
 
 > [!IMPORTANT]
-> One must be careful to ensure that for each node patched, changes will be made to the `node name`,`nodeIP`
+> One must be careful to ensure that for each node patched, changes will be made to the `node name`,`nodeIP`.
+> Thus you will end up with 3 different controlplane files (controlplane-01.yaml,controlplane-02.yaml,controlplane-03.yaml).
+> This will also apply to worker nodes configuration files (worker-01.yaml,worker-01.yaml,....x.yaml).
 
-**Apply the Customized Controlplane Configuration** 
+**Apply the Customized Controlplane Configuration**
 ---
-- We then apply the configuration file to install Talos Linus with Kubelet artifacts to specified system disk.
+- We then apply the configuration file to install Talos Linus with Kubelet artifacts to the specified system disk.
 
       talosctl apply-config --insecure \
-          --nodes 192.168.0.2 \          
+          --nodes 192.168.0.2 \
           --file controlplane-01.yaml
 
 > [!IMPORTANT]
-> If you create a DNS record for this IP, note you will need to use the IP address itself
+> Remember to apply the
