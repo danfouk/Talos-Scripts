@@ -17,17 +17,22 @@
 
 **Installation Notes and Steps**
 ---
-`Notes :`
-- Download the Talos ISO from https://github.com/siderolabs/talos/releases/tag/v1.7.6
+` Notes :` _credit to Talos Offical Docs._
+- Download the Talos ISO from  https://github.com/siderolabs/talos/releases/download/v1.7.6/metal-amd64.iso
 - For me I prefere to use the https://factory.talos.dev/ to generate custom ISO Images with the needed system extensions for my environment:
 >System Extensions which enable one to extend the Talos Linux base image with additional feature: extra drivers, hardware firmware, container runtimes, guest agents, etc.
 
  >[!TIP]
  >For a highly available production Kubernetes cluster, it is recommended to use three control plane nodes. Using five nodes can provide greater fault tolerance, but imposes more replication overhead and can result in worse performance.
 
-- Boot all three control plane nodes at this point. They will boot Talos Linux, and come up in maintenance mode, awaiting a configuration.
-- 
+At this point, you should:
+- boot one machine off the ISO to be the control plane node
+- boot one or more machines off the same ISO to be the workers
 
+**Define the Kubernetes Endpoint**
+---
+- In order to configure Kubernetes, Talos needs to know what the endpoint of the Kubernetes API Server will be.
+- in order to be highly available, should be configured in a way that uses all available control plane nodes.
 
 
 
