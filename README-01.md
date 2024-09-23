@@ -138,8 +138,8 @@ Once chosen, form the full HTTPS URL from this IP:
 
 > [!IMPORTANT]
 > One must be careful to ensure that for each node patched, changes will be made to the `node name`,`nodeIP`.
-> Thus you will end up with 3 different controlplane files (controlplane-01.yaml,controlplane-02.yaml,controlplane-03.yaml).
-> This will also apply to worker nodes configuration files (worker-01.yaml,worker-01.yaml,....x.yaml).
+- Thus you will end up with 3 different controlplane files (controlplane-01.yaml,controlplane-02.yaml,controlplane-03.yaml).
+- This will also apply to worker nodes configuration files (worker-01.yaml,worker-01.yaml,....x.yaml).
 
 **Apply the Customized Controlplane Configuration**
 ---
