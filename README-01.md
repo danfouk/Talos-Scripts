@@ -104,7 +104,28 @@ Once chosen, form the full HTTPS URL from this IP:
 
         curl -sL https://talos.dev/install | sh
 
-      
+**Generating configuration Secrets**
+---
++ When generating the configuration files for a Talos Linux cluster, it is recommended to start with generating a secrets bundle which should be saved in a secure location.
++ This bundle can be used to generate machine or client configurations at any time:
+  
+      talosctl gen secrets -o secrets.yaml
+> The secrets.yaml can also be extracted from the existing controlplane machine configuration with `talosctl gen secrets --from-controlplane-config controlplane.yaml -o secrets.yaml` command.
+
+- Now, lets go ahead and  generate the machine configuration for each node:
+
+        talosctl gen config --with-secrets secrets.yaml <cluster-name> <cluster-endpoint>
+- Note, `cluster-name` is an arbitrary name for the cluster, used in your local client configuration as a label. It should be unique in the configuration on your local workstation.
+- The `cluster-endpoint` is the Kubernetes Endpoint you selected from above. This is the Kubernetes API URL, and it should be a complete URL, with https:// and port. (The default port is 6443)
+  
+>  Example:
+
+      talosctl gen config --with-secrets secrets.yaml my-cluster https://192.168.64.15:6443
+      generating PKI and tokens
+      created controlplane.yaml
+      created worker.yaml
+      created talosconfig
+
 > [!NOTE]
 > Useful information that users should know, even when skimming content.
 
