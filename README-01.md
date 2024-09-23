@@ -125,22 +125,3 @@ Once chosen, form the full HTTPS URL from this IP:
       created controlplane.yaml
       created worker.yaml
       created talosconfig
-
-> [!NOTE]
-> Useful information that users should know, even when skimming content.
-
-> [!TIP]
-> Helpful advice for doing things better or more easily.
-
-> [!IMPORTANT]
-> Key information users need to know to achieve their goal.
-
-> [!WARNING]
-> Urgent info that needs immediate user attention to avoid problems.
-
-> [!CAUTION]
-> Advises about risks or negative outcomes of certain actions.
-
-- George Washington
-* John Adams
-+ Thomas Jefferson
