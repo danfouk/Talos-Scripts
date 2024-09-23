@@ -98,6 +98,7 @@ Once chosen, form the full HTTPS URL from this IP:
 
 **Configure Talos Linux from a Client Ubuntu Server**
 ---
++ To start with Talos configuration we will need to install the `talosctl` tool.
 + You can automatically install the correct version of talosctl for your operating system and architecture with an installer script.
 + This script won’t keep your version updated with releases and you will need to re-run the script to download a new version
 
