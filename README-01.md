@@ -3,7 +3,7 @@
 **Start by Creating 3 Control VMs each with:**
 ---
    - 50 GB SSD (boot drive)
-   - `4 vCPU`
+   - 4 vCPU
    - 16 GB RAM
    - 2 vNIC (One for _Public Access_ and One for the _Private Access_ to be used for _KUB internal communication_)
 
@@ -134,4 +134,4 @@ Once chosen, form the full HTTPS URL from this IP:
 - `worker node`
 
         talosctl machineconfig patch worker.yaml --patch @worker-patch.yaml --output worker-01.yaml  
-   - https://github.com/danfouk/Talos-Scripts/blob/main/controlplane-patch.yaml
+   - https://github.com/danfouk/Talos-Scripts/blob/main/worker-patch.yaml
