@@ -1,4 +1,4 @@
-
+## Talos Configuration Need to Bootstrap and Connect to Kubenertes Cluster
 
 > [!NOTE]
 > Useful information that users should know, even when skimming content.
