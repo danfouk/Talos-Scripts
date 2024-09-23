@@ -33,9 +33,24 @@ At this point, you should:
 ---
 - In order to configure Kubernetes, Talos needs to know what the endpoint of the Kubernetes API Server will be.
 - In order for the endpoint to be highly available, it should be configured in a way that uses all available control plane nodes.
-- There are 3 major ways but for my LAB I am using `Talos Linux’s built in VIP functionality`.(using a load-balancer,or using multiple DNS records)
+- There are 3 major ways
+   - Using a load-balancer,o
+   - Using multiple DNS records,
+   - Talos Linux’s built in VIP functionality.
+- For my LAB I am using `Talos Linux’s built in VIP functionality`.
 
+**Layer 2 VIP Shared IP** 
+---
+- Talos has integrated support for serving Kubernetes from a shared/virtual IP address. This requires Layer 2 connectivity between control plane nodes.
+- Choose an unused IP address on the same subnet as the control plane nodes for the VIP. For instance, if your control plane node IPs are:
+   - 192.168.0.10
+   - 192.168.0.11
+   - 192.168.0.12
+- One could choose the IP 192.168.0.15 as your VIP/SHARED IP address. (Make sure that 192.168.0.15 is not used by any other machine and is excluded from DHCP ranges.)
 
+Once chosen, form the full HTTPS URL from this IP:
+
+      https://192.168.0.15:6443
 
 
 > [!NOTE]
