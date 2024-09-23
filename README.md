@@ -96,6 +96,10 @@ Once chosen, form the full HTTPS URL from this IP:
           advertisedSubnets: # listenSubnets defaults to advertisedSubnets if not set explicitly
             - 192.168.0.0/16
 
+**Configure Talos Linux from a Client Ubuntu Server**
+---
+
+
       
 > [!NOTE]
 > Useful information that users should know, even when skimming content.
