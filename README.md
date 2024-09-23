@@ -18,8 +18,15 @@
 **Installation Notes and Steps**
 ---
 `Notes :`
-- For a production, highly available Kubernetes cluster, it is recommended to use three control plane nodes. Using five nodes can provide greater fault tolerance, but imposes more replication overhead and can result in worse performance.
+- Download the Talos ISO from https://github.com/siderolabs/talos/releases/tag/v1.7.6
+- For me I prefere to use the https://factory.talos.dev/ to generate custom ISO Images with the needed system extensions for my environment:
+>System Extensions which enable one to extend the Talos Linux base image with additional feature: extra drivers, hardware firmware, container runtimes, guest agents, etc.
+
+ >[!TIP]
+ >For a highly available production Kubernetes cluster, it is recommended to use three control plane nodes. Using five nodes can provide greater fault tolerance, but imposes more replication overhead and can result in worse performance.
+
 - Boot all three control plane nodes at this point. They will boot Talos Linux, and come up in maintenance mode, awaiting a configuration.
+- 
 
 
 
