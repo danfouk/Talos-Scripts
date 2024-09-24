@@ -138,8 +138,8 @@ Once chosen, form the full HTTPS URL from this IP:
 
 > [!IMPORTANT]
 > One must be careful to ensure that for each node patched, changes will be made to the `node name`,`nodeIP`.
-- Thus you will end up with 3 different controlplane files (controlplane-01.yaml,controlplane-02.yaml,controlplane-03.yaml).
-- This will also apply to worker nodes configuration files (worker-01.yaml,worker-01.yaml,....x.yaml).
+- Thus you will end up with 3 different controlplane files (e.t.c controlplane-01.yaml,controlplane-02.yaml,controlplane-03.yaml).
+- This will also apply to worker nodes configuration files (e.t.c worker-01.yaml,worker-01.yaml,....x.yaml).
 
 **Apply the Customized Controlplane Configuration**
 ---
@@ -150,4 +150,24 @@ Once chosen, form the full HTTPS URL from this IP:
           --file controlplane-01.yaml
 
 > [!IMPORTANT]
-> After the configuration is applied to a node, it will reboot after some time(2-10mins). Repeat this process for each of the nodes in your cluster. 
+> After the configuration is applied to a node, it will reboot after some time(2-10mins). Repeat this process for each of the nodes in your cluster.
+
+# Talos Bootstrap and Connecting to Kubenertes Cluster
+## Kubernetes Bootstrap
++ Bootstrapping your Kubernetes cluster by simply calling the bootstrap command against any of your control plane nodes.:
+
+        talosctl bootstrap --nodes 192.168.0.2
+
+> [!CAUTION]
+> The bootstrap operation should only be called ONCE and only on a SINGLE control plane node!
+
+At this point, Talos will form an `etcd` cluster, generate all of the core Kubernetes assets, and start the Kubernetes control plane components.
+
+After a few moments, you will be able to download your Kubernetes client configuration and get started:
+    
++ Run the command below  to add (merge) you new cluster into your local Kubernetes configuration.
+
+        talosctl kubeconfig
+
+At this stage we should be able to connect to Kubernetes and see your all configured nodes:
+
