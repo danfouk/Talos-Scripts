@@ -169,5 +169,5 @@ After a few moments, you will be able to download your Kubernetes client configu
 
         talosctl kubeconfig
 
-At this stage we should be able to connect to Kubernetes and see your all configured nodes:
++ At this stage we should be able to connect to Kubernetes and see your all configured nodes:
 
