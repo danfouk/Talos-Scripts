@@ -171,3 +171,21 @@ After a few moments, you will be able to download your Kubernetes client configu
 
 + At this stage we should be able to connect to Kubernetes and see your all configured nodes:
 
+# Talos Bootstrap and Connecting to Kubenertes Cluster
+## Kubernetes Bootstrap
++ Bootstrapping your Kubernetes cluster by simply calling the bootstrap command against any of your control plane nodes.:
+
+        talosctl bootstrap --nodes 192.168.0.2
+
+> [!CAUTION]
+> The bootstrap operation should only be called ONCE and only on a SINGLE control plane node!
+
+At this point, Talos will form an `etcd` cluster, generate all of the core Kubernetes assets, and start the Kubernetes control plane components.
+
+After a few moments, you will be able to download your Kubernetes client configuration and get started:
+    
++ Run the command below  to add (merge) you new cluster into your local Kubernetes configuration.
+
+        talosctl kubeconfig
+
+At this stage we should be able to connect to Kubernetes and see your all configured nodes:
