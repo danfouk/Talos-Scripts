@@ -1,4 +1,4 @@
-## Creating My Ultimate Kubnert LAB (Talos Linux + Cilium + Ceph Rook)
+## Creating My Ultimate Kubnert LAB (Talos Linux v1.7.6 + Cilium + Ceph Rook)
 
 **Start by Creating 3 Control VMs each with:**
 ---
