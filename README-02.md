@@ -29,8 +29,7 @@ The next step is to use `Cilium CLI`,let start by install it on our linux jumpbo
     sha256sum --check cilium-linux-${CLI_ARCH}.tar.gz.sha256sum
     sudo tar xzvfC cilium-linux-${CLI_ARCH}.tar.gz /usr/local/bin
     rm cilium-linux-${CLI_ARCH}.tar.gz{,.sha256sum}
-
-        
+      
  >[!NOTE] 
  > It is recommended to template the cilium manifest using helm and use it as part of Talos machine config, but if you want to install Cilium using the Cilium CLI, you can follow the steps below.
 
@@ -50,6 +49,9 @@ The next step is to use `Cilium CLI`,let start by install it on our linux jumpbo
     --set hubble.ui.service.type=NodePort \
     --set hubble.relay.service.type=NodePort \
     --set k8sServicePort=7445
+
+This put your cluster is a ready state and fully functional now.
+
 
 > [!NOTE]
 > Useful information that users should know, even when skimming content.
