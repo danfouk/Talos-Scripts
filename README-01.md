@@ -184,7 +184,7 @@ At this point, Talos will form an `etcd` cluster, generate all of the core Kuber
 
 After a few moments, you will be able to download your Kubernetes client configuration and get started:
     
-+ Run the command below  to add (merge) you new cluster into your local Kubernetes configuration.
++ Run the command below  to add (merge) your new cluster into your local Kubernetes configuration.
 
         talosctl kubeconfig
 
