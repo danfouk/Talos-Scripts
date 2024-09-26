@@ -62,13 +62,21 @@ To add more nodes to a Talos Linux cluster, follow the same procedure as when in
 You need the `controlplane.yaml` and `worker.yaml` that were created when you initially deployed your cluster. These contain the certificates that enable new machines to join.
 
 Once you have the IP address, you can then apply the correct configuration for each machine you are adding, either `worker` or `controlplane`.
-
         
           talosctl apply-config --insecure \
 
             --nodes [NODE IP] \
 
-            --file controlplane.yaml
+            --file [controlplane.yaml] or [worker.yaml]
+
+The insecure flag is necessary because the PKI infrastructure has not yet been made available to the node.
+
+You do not need to bootstrap the new node. Regardless of whether you are adding a control plane or worker node, it will now join the cluster in its role.
+
+
+
+
+
 
 
 
