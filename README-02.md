@@ -54,6 +54,24 @@ The next step is to use `Cilium CLI`,let start by install it on our linux jumpbo
 > ***This put your cluster is a ready state and fully functional now.***
 
 # How to add more nodes to a Talos Linux cluster.
+To add more nodes to a Talos Linux cluster, follow the same procedure as when initially creating the cluster:
+
++ boot the new machines to install Talos Linux
++ apply the `worker.yaml` or `controlplane.yaml` configuration files to the new machines.
+
+You need the `controlplane.yaml` and `worker.yaml` that were created when you initially deployed your cluster. These contain the certificates that enable new machines to join.
+
+Once you have the IP address, you can then apply the correct configuration for each machine you are adding, either `worker` or `controlplane`.
+
+        
+          talosctl apply-config --insecure \
+
+            --nodes [NODE IP] \
+
+            --file controlplane.yaml
+
+
+
 
 > [!NOTE]
 > Useful information that users should know, even when skimming content.
