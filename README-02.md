@@ -50,8 +50,10 @@ The next step is to use `Cilium CLI`,let start by install it on our linux jumpbo
     --set hubble.relay.service.type=NodePort \
     --set k8sServicePort=7445
 
-This put your cluster is a ready state and fully functional now.
+> [!IMPORTANT]
+> ***This put your cluster is a ready state and fully functional now.***
 
+# How to add more nodes to a Talos Linux cluster.
 
 > [!NOTE]
 > Useful information that users should know, even when skimming content.
