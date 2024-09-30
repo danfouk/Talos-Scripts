@@ -73,6 +73,7 @@ The insecure flag is necessary because the PKI infrastructure has not yet been m
 
 You do not need to bootstrap the new node. Regardless of whether you are adding a control plane or worker node, it will now join the cluster in its role.
 
+## Building Access Into Kube-Cluster Using Cilium L2 Announcements / L2 Aware LB (Beta)
 
 
 
