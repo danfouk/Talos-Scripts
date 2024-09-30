@@ -189,3 +189,7 @@ After a few moments, you will be able to download your Kubernetes client configu
         talosctl kubeconfig
 
 + At this stage we should be able to connect to Kubernetes and see your all configured nodes:
+
+# Click the Link below for more
+- https://github.com/danfouk/Talos-Scripts/blob/main/README-02.md
+
