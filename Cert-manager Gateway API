@@ -1,3 +1,0 @@
-## Cert-manager
-Gateway API support is a beta feature in the latest stable release of Cert-manager at the time of writing (v1.15.2). 
-To enable this support we add the `--enable-gateway-api` flag on startup of Cert-manager. This is done by setting it as an extra argument when installing Cert-manager using its Helm Chart
