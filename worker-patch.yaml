@@ -1,1 +1,48 @@
+machine:
+  kubelet:
+        extraArgs:
+            rotate-server-certificates: "true"
+    network:
+        hostname: kube-worker-01
+        interfaces:
+            - interface: eth0
+              addresses:
+                - 192.168.8.14/24
+              routes:
+                - network: 0.0.0.0/0
+                  gateway: 192.168.8.1
+              vip:
+                ip: 192.168.8.10
+        nameservers:
+            - 9.9.9.9
+            - 1.1.1.1
+    install:
+        disk: /dev/sda
+        image: factory.talos.dev/installer/54cd581b3843b10f165d2350e106860bafd7b06931723c4cec2ae292b7cf422c:v1.8.3
+        wipe: false
+    time:
+        servers:
+            - time.cloudflare.com
 
+    kernel:
+        modules:
+            - name: drbd
+              parameters:
+                - usermode_helper=disabled
+            - name: drbd_transport_tcp
+
+cluster:
+    extraManifests:
+      - https://raw.githubusercontent.com/alex1989hu/kubelet-serving-cert-approver/main/deploy/standalone-install.yaml
+      - https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+    network:
+      cni:
+        name: none
+    proxy:
+      disabled: true
+    apiServer:
+        certSANs:
+            - 192.168.8.10
+            - 192.168.8.11
+            - 192.168.8.12
+            - 192.168.8.13
